@@ -2,8 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum TileableType
+{
+    thing,
+    decoration
+}
 public class Tileable : MonoBehaviour
 {
+    public TileableType tileType;
+
+    public Shootable thisShootable;
+
     public GameObject body;
     Collider2D thisCol;
     // Start is called before the first frame update

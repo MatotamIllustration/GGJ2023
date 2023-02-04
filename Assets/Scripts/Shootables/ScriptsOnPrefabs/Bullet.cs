@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : Shootable
+public class Bullet : MonoBehaviour
 {
-
     public Vector2 direction;
     public float speed;
 
@@ -18,9 +17,9 @@ public class Bullet : Shootable
     // Update is called once per frame
     void Update()
     {
-        transform.right = (new Vector2(transform.position.x, transform.position.y) + direction * speed * Time.deltaTime) - new Vector2(transform.position.x, transform.position.y);
+        transform.right = (new Vector2(transform.position.x, transform.position.y) + direction.normalized * speed * Time.deltaTime) - new Vector2(transform.position.x, transform.position.y);
 
-        transform.position = new Vector2(transform.position.x, transform.position.y) + direction * speed * Time.deltaTime;
+        transform.position = new Vector2(transform.position.x, transform.position.y) + direction.normalized * speed * Time.deltaTime;
         
     }
     private void OnCollisionEnter2D(Collision2D collision)

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shootable : MonoBehaviour, IPoolable
+public class Shootable : IPoolable
 {
     public GameObject body;
     public bool active { get; set; }
@@ -16,8 +16,4 @@ public class Shootable : MonoBehaviour, IPoolable
         body.SetActive(false);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-
-    }
 }

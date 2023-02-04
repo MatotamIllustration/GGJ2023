@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GunGridTile : MonoBehaviour
 {
-    ITileable TileableOnThisTile;
+    public Tileable TileableOnThisTile;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +22,29 @@ public class GunGridTile : MonoBehaviour
         _toSnap.position = transform.position;
     }
 
+    public void GetTileableInfo(Tileable _tile)
+    {
+        TileableOnThisTile = _tile;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Tileable")
         {
             if (Vector2.Distance(transform.position, collision.transform.position) < 0.5f)
+            {
                 SnapTo(collision.transform);
+            }
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Tileable>() == null)
+        {
+            return;
+        }
+
+        TileableOnThisTile = null;
     }
 }

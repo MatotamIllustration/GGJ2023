@@ -77,10 +77,10 @@ public class Player : MonoBehaviour
 
     public void Shoot(InputAction.CallbackContext context)
     {
-        GameObject temp = Instantiate(bulletPrefab, barrel.transform.position, new Quaternion(0, 0, 0, 0));
+        BullletShootable newBullet = new BullletShootable();
         Vector2 transformPosition2D = new Vector2(transform.position.x, transform.position.y);
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 directionToMouse = mousePosition - transformPosition2D;
-        temp.GetComponent<Bullet>().SetDirection(directionToMouse.normalized);
+        newBullet.MakeBullet(barrel.transform.position, directionToMouse) ;
     }
 }

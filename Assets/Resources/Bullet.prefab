@@ -99,7 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d36a9c2bfbd7816438397e32cd20aec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 3657029951362133922}
   direction: {x: 1, y: 0}
   speed: 15
   damage: 1
@@ -116,9 +115,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.03}
   serializedVersion: 2
-  m_Radius: 0.05
+  m_Radius: 0.23
 --- !u!50 &8607777151394933722
 Rigidbody2D:
   serializedVersion: 4
@@ -137,6 +136,6 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
