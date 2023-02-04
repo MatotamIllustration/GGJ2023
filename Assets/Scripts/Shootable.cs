@@ -7,13 +7,24 @@ public class Shootable : IPoolable
     public GameObject body;
     public bool active { get; set; }
 
-    public void OnEnableObject()
+    public int damage;
+    public float speed;
+
+    public void SetStats(int _damage, float _speed)
     {
-        body.SetActive(true);
+        damage = _damage;
+        speed = _speed;
     }
-    public void OnDisableObject()
+
+    public virtual void OnEnableObject()
     {
-        body.SetActive(false);
+        if (body != null)
+            body.SetActive(true);
+    }
+    public virtual void OnDisableObject()
+    {
+        if (body != null)
+            body.SetActive(false);
     }
 
 }

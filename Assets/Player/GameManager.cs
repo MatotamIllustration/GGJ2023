@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        //stateMachine = new GameStateMachine();
+        //stateMachine = new GameStateMachine()
+        GunManager.Initialize();
     }
 }

@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     public float speed;
 
     public int damage;
+    public bool hit;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,17 +24,29 @@ public class Bullet : MonoBehaviour
         
     }
     private void OnCollisionEnter2D(Collision2D collision)
-    {        
+    {
+        if(collision.gameObject.tag == "PlayerBullet")
+        {
+            return;
+        }
+
         if (collision.gameObject.tag == "Enemy")
         {
             //attack that shit
             collision.gameObject.GetComponent<Enemy>().ChangeHealth(damage);
         }
-        Destroy(this.gameObject);
+
+        hit = true;
     }
 
     public void SetDirection(Vector2 _newDir)
     {
         direction = _newDir;
+    }
+
+    public void SetStats(int _damage, float _speed)
+    {
+        damage = _damage;
+        speed = _speed;
     }
 }

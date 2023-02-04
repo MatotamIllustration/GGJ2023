@@ -8,9 +8,20 @@ public enum TileableType
     thing,
     decoration
 }
+
+public enum ShootableType
+{
+    bullet,
+    grenade,
+    laser,
+    fire,
+    ice
+}
+
 public class Tileable : MonoBehaviour
 {
     public TileableType tileType;
+    public ShootableType shootType;
 
     public Shootable thisShootable;
 

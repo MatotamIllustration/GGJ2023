@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
     //shoot the bullets from here
     public Transform barrel;
 
+    ObjectPool<BullletShootable> bulletPool;
+    List<BullletShootable> activeBullets;
+
     public float gunDistanceFromPlayer;
 
     PlayerInputActions controls;
@@ -31,6 +34,8 @@ public class Player : MonoBehaviour
         //inputManager.AddActionToInput(InputDistributor.inputActions.Player.Move, Move);
         InputManager.AddActionToInput(InputDistributor.inputActions.Player.Shoot, Shoot);
 
+        bulletPool = new ObjectPool<BullletShootable>();
+        activeBullets = new List<BullletShootable>();
     }
 
     private void OnEnable()
@@ -53,6 +58,16 @@ public class Player : MonoBehaviour
         Move();
         MoveGun(gun);
 
+        for(int i = 0; i < activeBullets.Count; i++)
+        {
+            activeBullets[i].LogicUpdate();
+            if (activeBullets[i].hit)
+            {
+                bulletPool.ReturnObjectToPool(activeBullets[i]);
+                activeBullets.Remove(activeBullets[i]);
+                i--;
+            }
+        }
     }
 
     void Move()
@@ -77,10 +92,29 @@ public class Player : MonoBehaviour
 
     public void Shoot(InputAction.CallbackContext context)
     {
-        BullletShootable newBullet = new BullletShootable();
-        Vector2 transformPosition2D = new Vector2(transform.position.x, transform.position.y);
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 directionToMouse = mousePosition - transformPosition2D;
-        newBullet.MakeBullet(barrel.transform.position, directionToMouse) ;
+        StartCoroutine(shootBurst());
+    }
+
+    public void ShootShootable(Shootable _toShoot)
+    {
+        if(_toShoot.GetType() == typeof(BullletShootable))
+        {
+            BullletShootable newBullet = bulletPool.RequestItem();
+            Vector2 transformPosition2D = new Vector2(transform.position.x, transform.position.y);
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 directionToMouse = mousePosition - transformPosition2D;
+            newBullet.SetStats(_toShoot.damage, _toShoot.speed);
+            newBullet.MakeBullet(barrel.transform.position, directionToMouse);
+            activeBullets.Add(newBullet);
+        }
+    }
+
+    IEnumerator shootBurst()
+    {
+        for (int i = 0; i < GunManager.bulletsToShoot.Length; i++)
+        {
+            ShootShootable(GunManager.bulletsToShoot[i]);
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }

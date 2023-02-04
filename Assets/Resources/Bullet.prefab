@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8607777151394933722}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,6 +102,7 @@ MonoBehaviour:
   direction: {x: 1, y: 0}
   speed: 15
   damage: 1
+  hit: 0
 --- !u!58 &3657029951362133921
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -138,4 +139,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 0
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 7

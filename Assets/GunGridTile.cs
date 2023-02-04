@@ -34,6 +34,7 @@ public class GunGridTile : MonoBehaviour
             if (Vector2.Distance(transform.position, collision.transform.position) < 0.5f)
             {
                 SnapTo(collision.transform);
+                GetTileableInfo(collision.gameObject.GetComponent<Tileable>());
             }
         }
     }

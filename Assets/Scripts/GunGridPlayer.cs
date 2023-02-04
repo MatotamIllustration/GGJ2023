@@ -5,6 +5,7 @@ using UnityEngine;
 public class GunGridPlayer : MonoBehaviour
 {
     Tileable currentlyHeld;
+    public GunGridManager gridManager;
     // Start is called before the first frame update
     void Start()
     {

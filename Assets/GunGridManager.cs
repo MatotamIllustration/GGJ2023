@@ -17,7 +17,7 @@ public class GunGridManager : MonoBehaviour
         
     }
 
-    public Shootable[] UpdateGunProperties()
+    public void UpdateGunProperties()
     {
         List<Shootable> toReturn = new List<Shootable>();
         foreach(GunGridTile tile in grid)
@@ -29,13 +29,13 @@ public class GunGridManager : MonoBehaviour
 
                 if(temp.tileType == TileableType.thing)
                 {
-                    //it's a shootable thing, check the area around it if it has any decorations, and at it to the list
+                    //it's a shootable thing, check the area around it if it has any decorations, and at it to the list                    
                     toReturn.Add(temp.thisShootable);
                 }
                 //pass it through
             }
         }
 
-        return toReturn.ToArray();
+        GunManager.UpdateBulletToShoot(toReturn.ToArray());
     }
 }
